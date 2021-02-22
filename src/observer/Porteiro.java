@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class Porteiro extends Thread {
 
-	private List<ChegadaAniversarianteObserver> obeservers = new ArrayList<>();
+	private List<ChegadaAniversarianteObserver> observers = new ArrayList<>();
 
 	public void addChegadaAniversarianteObserver(ChegadaAniversarianteObserver observer) {
-		obeservers.add(observer);
+		observers.add(observer);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class Porteiro extends Thread {
 				ChegadaAniversarianteEvent event = new ChegadaAniversarianteEvent(new Date());
 
 				// Notificar os observers
-				for (ChegadaAniversarianteObserver observer : obeservers) {
+				for (ChegadaAniversarianteObserver observer : observers) {
 					observer.chegou(event);
 				}
 			} else {
