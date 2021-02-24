@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class Porteiro extends Thread {
+public class Porteiro {
 
 	private List<ChegadaAniversarianteObserver> observers = new ArrayList<>();
 
@@ -13,23 +13,29 @@ public class Porteiro extends Thread {
 		observers.add(observer);
 	}
 
-	@Override
-	public void run() {
+	public void monitorar() {
 		Scanner sc = new Scanner(System.in);
 
-		while (true) {
-			int valor = sc.nextInt();
+		String valor = "";
 
-			if (valor == 1) {
+		while (!"SAIR".equalsIgnoreCase(valor)) {
+			System.out.println("Aniversariante chegou?");
+			valor = sc.nextLine();
+
+			if ("SIM".equalsIgnoreCase(valor)) {
+
+				// Criar o evento
 				ChegadaAniversarianteEvent event = new ChegadaAniversarianteEvent(new Date());
 
-				// Notificar os observers
-				for (ChegadaAniversarianteObserver observer : observers) {
-					observer.chegou(event);
-				}
+				// notificar os observadores!
+				observers.stream().forEach(o -> o.chegou(event));
+
 			} else {
 				System.out.println("Alarme falso!");
 			}
-		} // fim while
-	} // fim run
+
+		}
+
+		sc.close();
+	} // fim monitorar
 } // fim Porteiro

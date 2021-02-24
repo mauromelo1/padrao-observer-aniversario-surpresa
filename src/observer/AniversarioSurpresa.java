@@ -9,6 +9,6 @@ public class AniversarioSurpresa {
 		
 		porteiro.addChegadaAniversarianteObserver(namorada);
 		
-		porteiro.start();
+		porteiro.monitorar();
 	}
 }
